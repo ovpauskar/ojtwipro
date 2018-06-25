@@ -10,6 +10,7 @@
     "firebase": "^4.13.1",
     "git": "^0.1.5",
     "jspdf": "^1.4.1",
+    "jspdf-autotable": "^2.3.4",
     "npm-git-install": "^0.3.0",
     "primeicons": "^1.0.0-beta.9",
     "primereact": "^1.6.2",

@@ -26,3 +26,78 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+div.header {
+        text-align: center;
+        font-size: 35px;
+      }
+    
+      .ui.grid {
+        margin-top: 0px !important;
+      }
+    
+      h2 {
+        text-align: center;
+      }
+    
+      .ui.center.aligned.basic.segment {
+        padding: 0px !important;
+      }
+    
+      .ui.modal>.actions {
+        text-align: center !important;
+      }
+    
+      a {
+        float: right;
+        cursor: pointer;
+      }
+    
+      .ui.modal>.close {
+        top: 0.5rem !important;
+        right: 0.5rem !important;
+        color: black !important;
+      }
+    
+      #submitSuccess {
+        display: block;
+        color: green;
+        margin-top: 5px;
+        font-style: italic;
+      }
+    
+      .ui.reset.password.input {
+        width: 250px;
+        margin-right: 5px;
+      }
+    
+      .ui.form .two.fields>.field {
+        text-align: left;
+      }
+
+      .ui.horizontal.divider.block_or{
+        display: inline-table !important;
+      }
+    .ui.modal.transition.visible.active.tiny.model{ position: fixed; top: 30%; height: max-content;}
+      @media only screen and (max-width: 1023px) {
+        button.ui.blue.submit.button,
+        .ui.facebook.button,
+        .ui.google.button,
+        button.ui.red.button {
+          width: 100% !important;
+          margin: 5px 0px;
+        }
+        .ui.facebook.button,
+        .ui.google.button {
+          margin: 5px 5px !important;
+        }
+      }
+    
+      @media only screen and (min-width: 1024px) {
+        .ui.facebook.button,
+        button.ui.button.ui.google.button {
+          width: 45% !important;
+          margin: 5px;
+        }
+
+        
+      }

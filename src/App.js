@@ -44,7 +44,11 @@ class App extends Component {
   }
 
   render() {
-      const style = { blue_text: { color: "blue" } };
+    const style = {
+      blue_text: { color: "blue" }, 
+      OR_block: {
+        display: "inline - table",}
+     };
 
     // =================Sign-Up===================
     const SignupPopup = () => <Modal className="tiny model" trigger={<button className="ui red button">
@@ -207,7 +211,7 @@ class App extends Component {
                     <SignupPopup />
                     <ResetPasswordPopup />
 
-                    <div className="ui horizontal divider">OR </div>
+                    <div className="ui horizontal divider block_or" >OR </div>
                     <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
                   </div>
                 </div>
