@@ -37,10 +37,17 @@ export class Landline extends Component {
   }
 
   render() {
+    const styles = { cardrPimary: { backgroundColor: "#0275d8", borderColor: "#0275d8" }, btncolor: { color: "#fff" } };
+    const title = <h3 className="card-header text-white" style={styles.cardrPimary}>
+      Create Landline Issue
+      </h3>;
     return (
+      
         <div>
+        {title}
           <Panel>
           <strong>Can you please check if the cables that connects your device are connected properly?  </strong>
+          <br/><br/>
           <Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it is not connected" className="ui-button-danger" name="no" onClick={this.ansNo}/>
           </Panel>

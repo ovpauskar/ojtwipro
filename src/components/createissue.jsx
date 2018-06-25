@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { getPaymentStatus } from './services/getPaymentStatus';
+
 import axios from 'axios';
 import {Button} from 'primereact/components/button/Button';
 import {Panel} from 'primereact/components/panel/Panel';
@@ -19,7 +19,7 @@ export  class CreateIssue extends Component {
         loadForm: false
 
     }
-    this.getPaymentStatus = new getPaymentStatus(); 
+  
     }
     handleCheck = (data) => {
        
@@ -69,7 +69,7 @@ export  class CreateIssue extends Component {
         const classNameH3={
             padding: 20,
             "text-align":"center",
-            color: "brown"
+            color: "#0099CC"
         };
     if(this.state.paymentStatus==="Payment Not Done")
     {
@@ -102,14 +102,14 @@ export  class CreateIssue extends Component {
         <Panel><strong>Any service outage in the premises : <div class="ui green label">No</div></strong></Panel>
         <br/>
         <div class="ui three cards">
-            <div class="ui red card">
-            <a href="Landline"><h3 style={classNameH3}>Landline</h3></a>
+            <div class="ui blue card">
+            <Link to="/Landline"><h3 style={classNameH3}>Landline</h3></Link>
             </div>
-            <div class="ui orange card">
-            <a href="Cellular"> <h3 style={classNameH3}>Cellular</h3></a>
+            <div class="ui blue card">
+            <Link to="/Cellular"> <h3 style={classNameH3}>Cellular</h3></Link>
             </div>
-            <div class="ui yellow card">
-            <a href="Broadband"> <h3 style={classNameH3}>Broadband</h3></a>
+            <div class="ui blue card">
+            <Link to="/Broadband"> <h3 style={classNameH3}>Broadband</h3></Link>
             </div>
         </div>
     

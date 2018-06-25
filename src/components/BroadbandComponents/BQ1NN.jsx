@@ -32,7 +32,7 @@ export class Bq1nn extends Component {
           <div>
             <Panel>
              <strong>Can you please check if the modem shows any red light for internet service?</strong>
-             <Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
+             <br/><br/><Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
               <Button label="No, it is not connected" className="ui-button-danger" name="no" onClick={this.ansNo}/>
                </Panel>
                {this.state.ansYesStatus ? <SubmitTicketLandline></SubmitTicketLandline> :  null     }

@@ -25,7 +25,7 @@ export  class Cellular extends Component {
         this.setState({
           ansYesStatus:true,
           ansNoStatus:false,
-          issuesummary:this.refs.summary.value
+          
         });
   }
   ansNo=()=>
@@ -33,15 +33,25 @@ export  class Cellular extends Component {
         this.setState({
           ansNoStatus:true,
           ansYesStatus:false,
-          issuesummary:this.refs.summary.value
+         
         });
   }
 
   render() {
+    const padding={
+      padding: 2
+    }
+    const styles = { cardrPimary: { backgroundColor: "#0275d8", borderColor: "#0275d8" }, btncolor: { color: "#fff" } };
+    const title = <h3 className="card-header text-white" style={styles.cardrPimary}>
+        Create Cellular Issue
+      </h3>;
+
     return (
         <div>
+          {title}
           <Panel>
-          <strong ref="CQ1">Can you please check if there was any firmware update that happened in the recent past?   </strong>
+          <strong ref="CQ1" style={padding}>Can you please check if there was any firmware update that happened in the recent past?   </strong>
+          <br/><br/>
           <Button label="Yes, there was an update" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, there was no update found" className="ui-button-danger" name="no" onClick={this.ansNo}/>
           </Panel>

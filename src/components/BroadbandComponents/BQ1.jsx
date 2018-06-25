@@ -34,6 +34,7 @@ export  class Bq1 extends Component {
           <div class="left">
          <strong>Can you please check if the device at your home works properly by reconnecting the cables to it?</strong>
          </div>
+         <br/><br/>
          <div class="right">
          <Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it is not connected" className="ui-button-danger" name="no" onClick={this.ansNo}/>

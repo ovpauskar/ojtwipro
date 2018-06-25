@@ -32,7 +32,7 @@ export  class Lq1nn extends Component {
           <Panel>
           <div class="left">
          <strong ref="q1">Can you please check if the device at your home works properly by reconnecting the cable to it?</strong>
-         </div>
+         </div><br/><br/>
          <div class="right">
          <Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it is not connected" className="ui-button-danger" name="no" onClick={this.ansNo}/>

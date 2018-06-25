@@ -31,7 +31,7 @@ export  class Lq1y extends Component {
       <div>
         <Panel>
          <strong>Can you please check if the device at your home works properly by reconnecting the cables to it?</strong>
-         <Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
+         <br/><br/><Button label="Yes, it is well connected" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it is not connected" className="ui-button-danger" name="no" onClick={this.ansNo}/>
            </Panel>
           {this.state.ansYesStatus ? <SubmitTicketLandline></SubmitTicketLandline> :  null     }

@@ -41,7 +41,7 @@ export default class PreviousBill extends Component {
             color:'#fff'
         },
         trbackground:{
-            backgroundColor: '#ff6666'
+            backgroundColor: '#f20404'
         }
         
         
@@ -63,14 +63,14 @@ export default class PreviousBill extends Component {
         this.state.prvBill ? 
    
         <div className="card ">
-            <h3 className="card-header text-white" style={styles.cardrPimary}>Product History:</h3>
+            <h3 className="card-header text-black">Product History:</h3>
             <table className="table">
                 <thead>
                     <tr>
-                        <td>Moth</td>
-                        <td>Amount</td>
-                        <td>Pending Amount</td>
-                        <td>Paid Date</td>
+                        <td><strong>Month</strong></td>
+                        <td><strong>Amount</strong></td>
+                        <td><strong>Pending Amount</strong></td>
+                        <td><strong>Paid Date</strong></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,7 +80,7 @@ export default class PreviousBill extends Component {
                 </tbody>
             </table>
             <div>
-                <button className="btn btn-primary "> <Link  to={`/billdetails/${this.props.match.params.id}}`} style={styles.btncolor} > Back To Product </Link>  </button>
+                <button className="btn btn-primary "> <Link  to={`/billdetails/${this.props.match.params.id}}`} style={styles.btncolor} > Back </Link>  </button>
             </div>
             <div className="card-footer">
                 <small className="text-muted" >Last updated 3 mins ago</small>

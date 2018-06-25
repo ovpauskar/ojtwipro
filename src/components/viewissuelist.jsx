@@ -39,7 +39,18 @@ Show Details
   }
 
   render() {
-    const title = <h3> Issue Tracker List</h3>;
+    const styles = {
+      cardrPimary: {
+        backgroundColor: '#0275d8',
+        borderColor: '#0275d8'
+      },
+      btncolor: {
+        color: '#fff'
+      }
+
+    }
+    const title = <h3 className="card-header text-white" style={styles.cardrPimary}>Issue Lists </h3>;
+
     const issueRows = this.state.issueList.map(e => {
                               return (
                                 <tr key={e.id}>
@@ -49,7 +60,7 @@ Show Details
                                   <td>{e.createdDate}</td>
                                 
                                   <td>
-                                    <Link className="ui basic blue button"
+                                    <Link className="btn btn-primary"
                                           to={`/trackissue/${e.id}`}>
                                       Show Details
                                     </Link>

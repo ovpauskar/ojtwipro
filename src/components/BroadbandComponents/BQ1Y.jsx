@@ -33,7 +33,7 @@ export  class Bq1y extends Component {
         <Panel>
            
          <strong ref="q2">Can you please check if the modem shows any red light for internet service?</strong>
-         <Button label="Yes, it shows red" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
+         <br/><br/><Button label="Yes, it shows red" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it shows green" className="ui-button-danger" name="no" onClick={this.ansNo}/>
            </Panel>
            {this.state.ansYesStatus ? <SubmitTicketLandline></SubmitTicketLandline> :  null     }

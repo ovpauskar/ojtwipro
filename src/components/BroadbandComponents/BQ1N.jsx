@@ -31,6 +31,7 @@ export  class Bq1n extends Component {
       <div>
           <Panel>
          <strong>Does it work after connecting the cable?</strong>
+         <br/><br/>
          <Button label="Yes, it works" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
           <Button label="No, it is still not working" className="ui-button-danger" name="no" onClick={this.ansNo}/>
           </Panel>

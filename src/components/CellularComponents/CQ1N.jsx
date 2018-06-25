@@ -31,7 +31,7 @@ export  class Cq1n extends Component {
       <div>
         <Panel>
         <strong>Have you changed your SIM card in the recent past?   </strong>
-        <Button label="Yes, I changed the SIM few days back" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
+        <br/><br/><Button label="Yes, I changed the SIM few days back" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
         <Button label="No, I have not changed my SIM recently" className="ui-button-danger" name="no" onClick={this.ansNo}/>
         </Panel>
         {this.state.ansYesStatus ? <SubmitTicketCellular></SubmitTicketCellular> :  null     }

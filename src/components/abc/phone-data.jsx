@@ -42,8 +42,9 @@ class PhoneDeatails extends Component {
 
     render() {
         const styles = {
-            btn1: {
-                marginLeft: '10px'
+            btn1:{
+                marginLeft: '10px',
+
             },
             panelhederBackground:{
                 backgroundColor: '#0275d8'
@@ -94,9 +95,10 @@ class PhoneDeatails extends Component {
                                 {/* <button type="button" style={styles.btn1} className="btn btn-primary" 
                                 onClick={() => this.handleCheck(this.props.prodata)}> View Bill</button> */}
 
-                                <Link className="ui basic blue button" to={`/billdetails/${this.props.prodata.id}`}>View bill</Link>
-                                <button type="button" style={styles.btn1} className="btn btn-primary"> View Plan</button>
-                                <button type="button" style={styles.btn1} className="btn btn-primary"> Support</button>
+                                
+                                <Link style={styles.btn1} className="btn btn-primary  col-8 mb-1 col-md-3 text-white" to={`/billdetails/${this.props.prodata.id}`}>View bill</Link>
+                                <button type="button" style={styles.btn1} className="btn btn-primary col-8 mb-1 col-md-3" disabled> View Plan</button>
+                                <button type="button" style={styles.btn1} className="btn btn-primary col-8 col-md-3" disabled> Support</button>
                             </div>
                         </div>
 

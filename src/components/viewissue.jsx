@@ -23,20 +23,29 @@ export class ViewIssue extends Component {
       });
   }
   render() {
+
+    const styles = {
+      cardrPimary: {
+        backgroundColor: '#0275d8',
+        borderColor: '#0275d8'
+      },
+      btncolor: {
+        color: '#fff'
+      }
+
+    }
     return (
-      this.state.issue ? <div className="ui card">
-          <div className="content">
-            <div className="header">
-              Issue Details with id : {this.state.issue.id}
-            </div>
-            <div className="description">
-              <p><strong>Issue Summary</strong> {this.state.issue.summary}</p>
-              <p><strong>Issue Status: </strong> {this.state.issue.issueStatus}</p>
-              <p><strong>Created Date: </strong> {this.state.issue.createdDate}</p>
+      this.state.issue ? < div className="card " >
+        <h3 className="card-header text-white" style={styles.cardrPimary}>Issue ID: <span className="fa fa-phone pull-right">
+        </span> {this.state.issue.id}</h3>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item"><label>  Issue Summary:</label>  {this.state.issue.summary}</li>
+          <li className="list-group-item"><label> Issue Status :</label>  {this.state.issue.issueStatus}</li>
+          <li className="list-group-item"> <label> Created Date :</label>  {this.state.issue.createdDate}</li>
+        </ul>
+      </div >: null
+
         
-            </div>
-          </div> 
-        </div> : null
     )
   }
   

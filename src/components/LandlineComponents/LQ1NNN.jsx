@@ -31,7 +31,7 @@ export class Lq1nnn extends Component {
           <div>
             <Panel>
              <strong>Does it work after reconnecting the cable?</strong>
-             <Button label="Yes, it works" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
+             <br/><br/><Button label="Yes, it works" className="ui-button-success"  name="yes" onClick={this.ansYes}/> 
               <Button label="No, it is still not working" className="ui-button-danger" name="no" onClick={this.ansNo}/>
             </Panel>
             {this.state.ansNoStatus ? <SubmitTicketLandline></SubmitTicketLandline> :  null     }
