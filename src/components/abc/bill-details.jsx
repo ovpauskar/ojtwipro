@@ -37,7 +37,7 @@ export default class BillDetail extends Component {
 
         doc.save("Billdetail.pdf");
 
-        this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Download Successful' });
     }
     render() {
         const styles = {
