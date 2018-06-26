@@ -6,7 +6,6 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Link, Switch, Route } from "react-router-dom";
 import ProductPannel from "./components/abc/products";
 import { button, Modal, input } from "semantic-ui-react";
-//import PhoneDeatails from "./components/abc/phone-data";
 import BillDetail from "./components/abc/bill-details";
 import PreviousBill from "./components/abc/previous_bill";
 import { CreateIssue } from "./components/createissue";
@@ -22,7 +21,9 @@ firebase.initializeApp({
 })
 
 class App extends Component {
-  state = { isSignedIn: false }
+  state = {
+    isSignedIn: false, fields: {},
+    errors: {}  }
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [
@@ -35,7 +36,32 @@ class App extends Component {
       signInSuccess: () => false
     }
   }
+  handleValidation() {
+    let fields = this.state.fields;
+    let errors = {};
+    let formIsValid = true;
+    //preventDefault();
 
+    //FirstName
+    if (!fields["FirstName"]) {
+      formIsValid = false;
+      errors["FirstName"] = "User name should not be empty";
+    }
+    //Password
+    if (!fields["Password"]) {
+      formIsValid = false;
+      errors["Password"] = "Password should not be empty";
+    }
+
+    this.setState({ errors: errors });
+    return formIsValid;
+  }
+
+  handleChange(field, e) {
+    let fields = this.state.fields;
+    fields[field] = e.target.value;
+    this.setState({ fields });
+  }
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
@@ -44,81 +70,7 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      blue_text: { color: "blue" }, 
-      OR_block: {
-        display: "inline - table",}
-     };
-
-    // =================Sign-Up===================
-    const SignupPopup = () => <Modal className="tiny model" trigger={<button className="ui red button">
-            Sign-Up&nbsp;
-            <i className="sign out alternate icon" />
-            
-          </button>} closeIcon>
-        <div className="ui header">Sign-Up</div>
-        <Modal.Actions>
-          <div className="ui form">
-            <div className="ui two fields">
-              <div className="ui field">
-                <label>First Name</label>
-                <input type="text" placeholder="First Name" />
-              </div>
-              <div className="ui field">
-                <label>Last Name</label>
-                <input type="text" placeholder="Last Name" />
-              </div>
-            </div>
-            <div className="ui two fields">
-              <div className="ui field">
-                <label>Email-id</label>
-                <input type="text" placeholder="abc@de.com" />
-              </div>
-              <div className="ui field">
-                <label>Mobile</label>
-                <input type="text" placeholder="Enter Mob Number" />
-              </div>
-            </div>
-            <div className="ui two fields">
-              <div className="ui field">
-                <label>Password</label>
-                <input type="password" placeholder="Enter password" />
-              </div>
-              <div className="ui field">
-                <label>Confirm Password</label>
-                <input placeholder="Re-enter Password" />
-              </div>
-            </div>
-            <button type="submit" className="ui primary button" role="button">
-              Submit
-            </button>
-          </div>
-        </Modal.Actions>
-      </Modal>;
-    //reset password popup
-    const ResetPasswordPopup = () => <Modal className="tiny model" trigger={<a style={style.blue_text}>
-            {" "}
-            Forgot Password ?
-          </a>} closeIcon>
-        <div className="ui header">Reset Your Password</div>
-        <Modal.Content>
-          <p>
-            Please provide email ID for password reset
-          </p>
-        </Modal.Content>
-        <Modal.Actions>
-          <div name="myForm">
-            <div className="ui reset password input">
-              <input placeholder="Add registered email ID..." name="Email" type="email" onSubmit={this.handleSubmit} />
-            </div>
-            <input type="submit" className="ui primary button" name="myForm" value="Submit" />
-            <div id="submitSuccess" />
-            <div id="notSuccess" />
-          </div>
-        </Modal.Actions>
-      </Modal>;
-
-
+    const style = {blue_text: { color: "blue" }};
     const styles = { pointer: { cursor: "pointer" } };
     return <div>
         {this.state.isSignedIn ? <div class="ui container">
@@ -127,9 +79,9 @@ class App extends Component {
                 <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
                   <ul className="navbar-nav">
                     <li className="nav-item active">
-                      <a className="nav-link" href="/">
+                      <Link className="nav-link" to="/">
                         <i className="home icon" /> Billing Application
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/">
@@ -138,12 +90,12 @@ class App extends Component {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/viewissue">
-                    <i className="eye outline icon" /> View Issues
+                        <i className="eye outline icon" /> View Issues
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/creatissue">
-                    <i className="edit outline icon" /> Create Issue
+                        <i className="edit outline icon" /> Create Issue
                       </Link>
                     </li>
                   </ul>
@@ -167,7 +119,7 @@ class App extends Component {
 
                 <Switch>
                   <Route exact path="/" component={ProductPannel} />
-              <Route exact path="/billdetails/:id" component={BillDetail} />
+                  <Route exact path="/billdetails/:id" component={BillDetail} />
                   <Route exact path="/previous_bill/:id" component={PreviousBill} />
                   <Route exact path="/viewissue" component={ViewIssueList} />
                   <Route exact path="/creatissue" component={CreateIssue} />
@@ -189,29 +141,115 @@ class App extends Component {
                   <div className="ui form">
                     <div className="field">
                       <label>
-                      <i className="user icon" />Username
+                        <i className="user icon" />Username
                       </label>
                       <div className="ui left icon input">
-                        <input placeholder="Add user name" type="text" />
+                        <input placeholder="Add user name" type="text" id="FirstName" ref="FirstName" onChange={this.handleChange.bind(this, "FirstName")} value={this.state.fields["FirstName"]}/>
                         <i className="user icon" />
                       </div>
+                    <p style={{ color: "red" }}>{this.state.errors["FirstName"]}</p>
                     </div>
                     <div className="field">
                       <label>
                         <i className="lock icon" /> Password
                       </label>
                       <div className="ui left icon input">
-                        <input type="password" placeholder="Add password" />
+                        <input type="password" placeholder="Add password"  id="Password" onChange={this.handleChange.bind(this, "Password")} />
                         <i className="lock icon" />
                       </div>
+                      <p style={{color: "red"}}>{this.state.errors["Password"]}</p>
                     </div>
-                    <button className="ui blue submit button">
-                    <i className="sign in alternate icon" /> Sign-In
-                    </button>
-                    <SignupPopup />
-                    <ResetPasswordPopup />
+                    <button className="ui blue submit button" onClick= {this.handleValidation.bind(this)}>
+                      <i className="sign in alternate icon" /> Sign-In
+                    </button>&nbsp;
+                    <button type="button" className="btn btn-success" data-toggle="modal" data-target="#sign_up">
+                      <i className="sign out alternate icon" /> Sign-Up
+                    </button> &nbsp;
+                    <span data-toggle="modal" data-target="#forget_password" className="text-primary">
+                      Forget Password ?
+                    </span>
+                    {/* ==================SIGN-UP====================== */}
+                    <div className="modal" id="sign_up">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title">Sign Up </h4>
+                            <button type="button" className="close" data-dismiss="modal">
+                              &times;
+                            </button>
+                          </div>
+                          <div className="modal-body">
+                            <div className="form-group">
+                              <label className>First Name </label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <div className="form-group">
+                              <label className>Last Name:</label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <div className="form-group">
+                              <label className>Email ID:</label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <div className="form-group">
+                              <label className>Mobile Number:</label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <div className="form-group">
+                              <label className>Enter Password</label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <div className="form-group">
+                              <label className>Confirm Password:</label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
 
-                    <div className="ui horizontal divider block_or" >OR </div>
+                            <button type="button" className="btn btn-warning">
+                              Submit <i className="file icon" />
+                            </button>
+                          </div>
+
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* =====================FORGET PASSWORD=========================== */}
+                    <div className="modal" id="forget_password">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title">Forget Password</h4>
+                            <button type="button" className="close" data-dismiss="modal">
+                              &times;
+                            </button>
+                          </div>
+                          <div className="modal-body">
+                            <p>
+                              Please provide email ID for password reset{" "}
+                            </p>
+                            <div className="form-group">
+                              <label className>Enter Email </label>
+                              <input type="text" className="form-control" className placeholder="Add here..." />
+                            </div>
+                            <button type="button" className="btn btn-warning">
+                              Send <i className="paper plane icon" />
+                            </button>
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ui horizontal divider block_or">
+                      OR{" "}
+                    </div>
                     <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
                   </div>
                 </div>
