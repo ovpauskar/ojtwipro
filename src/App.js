@@ -83,11 +83,11 @@ class App extends Component {
                         <i className="home icon" /> Billing Application
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <Link className="nav-link" to="/">
                         <i className="product hunt icon" /> Products
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/viewissue">
                         <i className="eye outline icon" /> View Issues

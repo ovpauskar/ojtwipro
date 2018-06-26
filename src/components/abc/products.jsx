@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneDeatails from './phone-data';
+import ProductDetails from './productList';
 
 
 import UserService from '../../shared/services/user-service';
@@ -35,7 +35,7 @@ class ProductPannel extends React.Component {
 
   render() {
   
-const produtData =  this.state.products.map(produt => <PhoneDeatails key={produt.id} prodata={produt} /> )
+const produtData =  this.state.products.map(produt => <ProductDetails key={produt.id} prodata={produt} /> )
 
     return (
        <div>
