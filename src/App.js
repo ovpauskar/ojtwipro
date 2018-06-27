@@ -23,7 +23,9 @@ firebase.initializeApp({
 class App extends Component {
   state = {
     isSignedIn: false, fields: {},
-    errors: {}  }
+    errors: {},
+    fieldSignup: {},
+    errorSignup: {} }
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [
@@ -62,6 +64,60 @@ class App extends Component {
     fields[field] = e.target.value;
     this.setState({ fields });
   }
+  // sign up validation
+  handleValidationSignup() {
+    let fieldSignup = this.state.fieldSignup;
+    let errorSignup = {};
+    let formIsValid = true;
+    //preventDefault();
+
+    //FirstName
+    if (!fieldSignup["fName"]) {
+      formIsValid = false;
+      errorSignup["fName"] = "First name should not be empty";
+    }
+    //LastName
+    if (!fieldSignup["lName"]) {
+      formIsValid = false;
+      errorSignup["lName"] = "Last name should not be empty";
+    }
+    //Email
+    if (!fieldSignup["Email"]) {
+      formIsValid = false;
+      errorSignup["Email"] = "Email should not be empty";
+    }
+    //Mobile Number
+    if (!fieldSignup["MobileNo"]) {
+      formIsValid = false;
+      errorSignup["MobileNo"] = "Mobile Number should not be empty";
+    }
+    //Password
+    if (!fieldSignup["SPassword"]) {
+      formIsValid = false;
+      errorSignup["SPassword"] = "Password should not be empty";
+    }
+    //confirm password
+    if (!fieldSignup["CPassword"]) {
+      formIsValid = false;
+      errorSignup["CPassword"] = "Confirm Password should not be empty";
+    }
+    //password should be same
+    if (typeof fieldSignup["CPassword"] !== "undefined") {
+      if (!fieldSignup["CPassword"].match(fieldSignup["SPassword"])) {
+        formIsValid = false;
+        errorSignup["CPassword"] = "Password should match";
+      }
+    }
+    this.setState({ errorSignup: errorSignup });
+    return formIsValid;
+  }
+
+  handleChangeSignup(field, e) {
+    let fieldSignup = this.state.fieldSignup;
+    fieldSignup[field] = e.target.value;
+    this.setState({ fieldSignup });
+  }
+
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
@@ -83,11 +139,11 @@ class App extends Component {
                         <i className="home icon" /> Billing Application
                       </Link>
                     </li>
-                    {/* <li className="nav-item">
+                    <li className="nav-item">
                       <Link className="nav-link" to="/">
                         <i className="product hunt icon" /> Products
                       </Link>
-                    </li> */}
+                    </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/viewissue">
                         <i className="eye outline icon" /> View Issues
@@ -169,54 +225,60 @@ class App extends Component {
                       Forget Password ?
                     </span>
                     {/* ==================SIGN-UP====================== */}
-                    <div className="modal" id="sign_up">
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h4 className="modal-title">Sign Up </h4>
-                            <button type="button" className="close" data-dismiss="modal">
-                              &times;
+                  <div className="modal" id="sign_up">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h4 className="modal-title">Sign Up </h4>
+                          <button type="button" className="close" data-dismiss="modal">
+                            &times;
                             </button>
+                        </div>
+                        <div className="modal-body">
+                          <div className="form-group">
+                            <label className>First Name:</label>
+                            <input type="text" id="fName" className="form-control" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "fName")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["fName"]}</p>
                           </div>
-                          <div className="modal-body">
-                            <div className="form-group">
-                              <label className>First Name </label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
-                            <div className="form-group">
-                              <label className>Last Name:</label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
-                            <div className="form-group">
-                              <label className>Email ID:</label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
-                            <div className="form-group">
-                              <label className>Mobile Number:</label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
-                            <div className="form-group">
-                              <label className>Enter Password</label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
-                            <div className="form-group">
-                              <label className>Confirm Password:</label>
-                              <input type="text" className="form-control" className placeholder="Add here..." />
-                            </div>
+                          <div className="form-group">
+                            <label className>Last Name:</label>
+                            <input type="text" className="form-control" id="lName" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "lName")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["lName"]}</p>
+                          </div>
+                          <div className="form-group">
+                            <label className>Email ID:</label>
+                            <input type="text" className="form-control" id="Email" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "Email")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["Email"]}</p>
+                          </div>
+                          <div className="form-group">
+                            <label className>Mobile Number:</label>
+                            <input type="text" className="form-control" id="MobileNo" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "MobileNo")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["MobileNo"]}</p>
+                          </div>
+                          <div className="form-group">
+                            <label className>Enter Password:</label>
+                            <input type="password" className="form-control" id="SPassword" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "SPassword")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["SPassword"]}</p>
+                          </div>
+                          <div className="form-group">
+                            <label className>Confirm Password:</label>
+                            <input type="password" className="form-control" id="CPassword" className placeholder="Add here..." onChange={this.handleChangeSignup.bind(this, "CPassword")} />
+                            <p style={{ color: "red" }}>{this.state.errorSignup["CPassword"]}</p>
+                          </div>
 
-                            <button type="button" className="btn btn-warning">
-                              Submit <i className="file icon" />
-                            </button>
-                          </div>
+                          <button type="button" className="btn btn-warning" onClick={this.handleValidationSignup.bind(this)} >
+                            Submit <i className="file icon" />
+                          </button>
+                        </div>
 
-                          <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">
-                              Close
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-danger" data-dismiss="modal">
+                            Close
                             </button>
-                          </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                     {/* =====================FORGET PASSWORD=========================== */}
                     <div className="modal" id="forget_password">
                       <div className="modal-dialog">
